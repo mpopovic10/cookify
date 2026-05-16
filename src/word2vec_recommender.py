@@ -8,7 +8,7 @@ ranking and returning top-n recipes.
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from vectorization import recipe_vector
+from word2vec_vectorization import recipe_vector
 from preprocessing import clean_ingredient_list
 from lemmatization import lemmatize_ingredients
 from stopwords import remove_stop_words
