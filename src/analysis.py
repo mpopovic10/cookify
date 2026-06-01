@@ -5,7 +5,7 @@ Exploratory data analysis functions for the recipe dataset.
 import pandas as pd
 from itertools import combinations
 
-from preprocessing import split_ingredients, normalise, build_ingredient_counter
+from src.preprocessing import split_ingredients, normalise, build_ingredient_counter
 from src.config import complexity_bins, complexity_labels
 
 

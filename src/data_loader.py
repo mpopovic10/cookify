@@ -54,5 +54,3 @@ def load_dataset(path=data_path, n=sample_size):
     df = sample_and_clean(df, n)
     df = add_derived_columns(df)
     return df
-
-load_raw("../data/13k-recipes.csv")

@@ -4,7 +4,7 @@ Edit this file to change data paths, model hyperparameters or visualisation sett
 """
 
 #data
-data_path = "../data/Food Ingredients and Recipe Dataset with Image Name Mapping.csv"
+data_path = "data/Food Ingredients and Recipe Dataset with Image Name Mapping.csv"
 sample_size = 5000
 random_state = 42
 
