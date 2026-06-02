@@ -101,8 +101,8 @@ As in the previous experiment, each recipe is converted into a string of normali
 - **Representation:** Sparse term-weight matrix
 - **Similarity metric:** Cosine similarity
 
-## Step 2: Similarity matching and recommendation
+### Step 2: Similarity matching and recommendation
 The recommendation process is the same as in Experiment 3, as well as computing cosine similarity.
 
-## Results
+### Results:
 The model performs modestly, but consistently better than the non-lemmatized TF-IDF model. Similarity scores are generally slightly better, but the improvement is not dramatic. Still, this experiment produced the best overall results out of the first four experiments. 
