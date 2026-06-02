@@ -44,7 +44,7 @@ The model learns vector representations of indvidual igredient tokens, capturing
 - **Min count:** 1 (includes all ingredients if they show even once)
 - **Training algorithm:** sg=1 (Skip-gram)
 
-### Step 2: Recipe vectorization:
+### Step 2: Recipe vectorization
 Each recipe is represented as a single vector by averaging the Word2Vec embeddings of all its ingredient tokens. This captures the overall profile of the recipe by comining individual ingredient semantics.
 
 ### Step 3: Similarity matching and recommendation
@@ -53,3 +53,18 @@ User ingredients are converted to vectors using the same averaging method. We co
 ### Results:
 Similarity scores are clustered tightly, limiting the ability to distinguis between recipes. This is likely due to vector averaging causing all recipe vectors to converge to similar regions in embedding space. The recommendation quality is also low, with most recommended recipes having 0-2 matched ingredients.
 In the next experiment, we try to improve these results by introducing lemmatization.
+
+## Experiment 2: Word2Vec With Lemmatization
+### Step 1: Build the lemmatizer
+We build a lemmatizer that will potentially enhance the results of the first experiment, since lemmatization reduces a word to its root form (lemma), considering its meaning and part of speech. For this, we use WordNetLemmatizer.
+
+### Step 2: New Word2Vec training with lemmatization
+We again train the same Word2Vec model as in the first experiment, but we apply it to the new corpus, obtained by applying the normalisation function with lemmatization. 
+
+### Step 3 and Step 4: Recipe vectorization, similarity matching and recommendation
+The last two steps are the same as in the first experiment.
+
+### Results:
+The results of this experiment were very similar to those obtained in Experiment 1. The similarity scores are still clustered closely around 0.99 and the improvement in the number of matched ingredients is not very meaningful.
+This led us to the conclusion that lemmatization alone is not enough to resolve the problems from the first experiment. The limitation of vector averaging is still fundamental.
+In the next experiment, we will try a new approach and fit TF-IDF.
