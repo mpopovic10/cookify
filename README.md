@@ -106,3 +106,8 @@ The recommendation process is the same as in Experiment 3, as well as computing 
 
 ### Results:
 The model performs modestly, but consistently better than the non-lemmatized TF-IDF model. Similarity scores are generally slightly better, but the improvement is not dramatic. Still, this experiment produced the best overall results out of the first four experiments. 
+
+## Experiment 5: SBERT (Sentence-BERT)
+**Overview:**
+Unlike the previous four experiments that rely on idividual ingredient token matching, SBERT (Sentence-BERT) encodes the entire recipe, including its title and ingredints list as a single dense vector using a pretrained transfomer model. This allows the system to capture semantic meaning at a higher level, going beyond exact keyword matching.
+We use the pretrained 'all-MiniLM-L6-v2' model, a lightweight but high-performance sentence emedding model. Since SBERT already understands language at a deep level, lemmatization will not be included as a part of the experiment.
