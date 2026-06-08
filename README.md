@@ -111,3 +111,19 @@ The model performs modestly, but consistently better than the non-lemmatized TF-
 **Overview:**
 Unlike the previous four experiments that rely on idividual ingredient token matching, SBERT (Sentence-BERT) encodes the entire recipe, including its title and ingredints list as a single dense vector using a pretrained transfomer model. This allows the system to capture semantic meaning at a higher level, going beyond exact keyword matching.
 We use the pretrained 'all-MiniLM-L6-v2' model, a lightweight but high-performance sentence emedding model. Since SBERT already understands language at a deep level, lemmatization will not be included as a part of the experiment.
+
+### Building the natural language corpus
+Each recipe is converted into a natural language sentence combining the recipe and its ingredient list. This gives SBERT the full context of the recipe, rather than just a bag of tokens. This is an important difference from the previous experiments: SBERT encodes the entire recipe, inluding its title and ingredient list, as a single sentence, while previous experiments treated recipes as a bag of individual tokens. Due to this, the SBERT model gains additional contet about the type of dish.
+
+**Model configuration:**
+- **Model:** 'all-MiniLM-L6-v2'
+- **Input:** Natural language sentence (title an ingredients)
+- **Representation:** Dense 384-dimensional vector
+- **Similarity metric:** Cosine similarity
+
+### Results:
+The SBERT model produced the most semantically relevant recommendations out of all five experiments. Unlike Word2Vec, the similarity scores are in a meaningful range and unlike TF-IDF, the recommendations capture the overall cooking context and not just keyword overlap.
+
+The num_matched scores still remain low due to the same mismatch between individual tokens and full inredient phrases observed in the previous experiments.
+
+Overall, the SBERT model outperforms all of the previous experiments in recommendation relevanece, leading us to the conclusion that semantic sentence embeddings are better suited for this task than token-level approaches.
