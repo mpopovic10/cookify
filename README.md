@@ -151,3 +151,16 @@ From the table and results of each experiment, it is visible that the **Word2Vec
 **SBERT** achieves the most consistent overall performance, with relevant recipes appearing in top positions. This shows that SBERT is more effective at capturing semantic similarity between recipes and user queries compared to token-based methods.
 
 Based on this, we decide to continue with the combination of TF-IDF with lemmatization for reliable lexical matching and SBERT due to its strong semantic retrieval and ranking quality. This will combine TF-IDF's robust keyword matching and SBERT's deep contextual understanding.
+
+# Final model: TF-IDF + lemmatization with SBERT Re-ranking
+## Overview:
+To combine the best features of TF-IDF with lemmatization (exact ingredient matching) amd SBERT (semantic relationships between queries and recipes), we will build a two-stage recommendation pipeline. The first stage uses TF-IDF with lemmatization to efficiently retrieve a set of candidate recipes and the second stage applies SBERT to re-rank those candidates according to semantic similarity. 
+
+### Step 1: Candidate retrieval using TF-IDF with lemmatization
+First, the user's ingredients are processed using the same normalization and lemmatization process from Experiment 4. The resulting tokens are transformed into a TF-IDF vector using the fitted TF-IDF model. Then, cosine similarity is computed between the query vector and all recipe vectors in the corpus. The system returns te top 50 candidate recipes, creating a smaller and more relevant search space for the semantic re-ranking.
+
+### Step 2: Semantic re-ranking using SBERT
+The candidate recipes obtained in the previous step are re-evaluated using SBERT. The system constructs a natural-language quey from the user's ingredients and encodes it using the same SBERT model as in Experiment 5. The SBERT embeddings are compared with the embeddings of the candidate recipes using cosine similarity. They are then sorted according to their semantic similarity scores.
+
+### Step 3: Final recommendation generation
+The final result of the system is the top-N highest-ranked recipes. The final recommendations contain ingredients that closely match the user's query and are conceptually related to the kind of meal that a user is looking for.
