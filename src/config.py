@@ -23,6 +23,9 @@ w2v_min_count = 1
 w2v_workers = 4
 w2v_sg = 1  # 1 = skip-gram
 
+#SBERT
+sbert_model_name = 'all-MiniLM-L6-v2'
+
 #recommender
 top_n_default = 5
 

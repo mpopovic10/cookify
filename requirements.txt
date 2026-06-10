@@ -1,0 +1,7 @@
+pandas
+numpy
+nltk
+gensim
+scikit-learn
+matplotlib
+sentence-transformers>=3.0.0

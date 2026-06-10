@@ -5,7 +5,7 @@ Recipe recommendation functions for Word2Vec and TF-IDF models.
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from src.preprocessing import split_ingredients, normalise, normalise_lemma
+from src.preprocessing import split_ingredients, normalise, normalise_lemma, get_tokens
 from src.config import top_n_default
 
 
@@ -102,5 +102,31 @@ def recommend_tfidf(user_ingredients, vectorizer, matrix, df, top_n=top_n_defaul
     results["similarity"] = sims[top_idx].round(4)
     results["num_matched"] = results["Cleaned_Ingredients"].apply(
         lambda lst: _count_matched(lst, tokens, lemma=lemma)
+    )
+    return results.reset_index(drop=True)
+
+
+def recommend_sbert(query_ingredients, sbert_model, embeddings, df, top_n=5):
+    """
+    Recommends recipes using Sentence-BERT semantic similarity.
+
+    :param query_ingredients: list of ingredient strings (e.g., ["chicken", "lemon", "garlic"])
+    :param sbert_model: fitted SentenceTransformer model
+    :param embeddings: recipe embeddings matrix from encode_recipes()
+    :param df: recipe DataFrame with sbert_text column
+    :param top_n: number of top recommendations to return
+    :return: DataFrame with recommendations and similarity scores
+    """
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    query_string = f"Recipe containing {', '.join(query_ingredients)}"
+    query_embedding = sbert_model.encode([query_string])
+    similarities = cosine_similarity(query_embedding, embeddings).flatten()
+
+    top_indices = np.argsort(similarities)[::-1][:top_n]
+    results = df.iloc[top_indices][["Title", "Cleaned_Ingredients"]].copy()
+    results["similarity"] = similarities[top_indices].round(4)
+    results["num_matched"] = results["Cleaned_Ingredients"].apply(
+        lambda lst: len(set(_get_query_tokens(query_ingredients)).intersection(set(get_tokens(lst))))
     )
     return results.reset_index(drop=True)
