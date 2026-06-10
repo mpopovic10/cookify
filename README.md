@@ -61,7 +61,6 @@ Three numeric features were created to characterize each recipe:
 Both `num_ingredients` and `instr_word_count` are **right-skewed**: most recipes are short and simple, but a long tail of elaborate recipes pulls the mean upward.
 
 <img src="recipe-distributions.png" alt="Feature Length Distributions" width="100%" />
-
 ### 3. Recipe Complexity Distribution
 
 Recipes were binned into four complexity tiers based on their ingredient count:
@@ -96,7 +95,7 @@ Before counting, ingredient strings were pre-processed to reduce text noise by s
 14. **Cream** (900 counts)
 15. **Tomato** (850 counts)
 
-<img src="top-most-15-ingredients.png" alt="Top 15 Most Common Ingredients" width="100%" />
+<img src="top-most-15-ingredients.png.png" alt="Top 15 Most Common Ingredients" width="100%" />
 
 ### 5. Ingredient Co-occurrence & Correlations
 
