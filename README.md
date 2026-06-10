@@ -95,7 +95,7 @@ Before counting, ingredient strings were pre-processed to reduce text noise by s
 14. **Cream** (900 counts)
 15. **Tomato** (850 counts)
 
-<img src="top-most-15-ingredients.png.png" alt="Top 15 Most Common Ingredients" width="100%" />
+<img src="top-most-15-ingredients.png" alt="Top 15 Most Common Ingredients" width="100%" />
 
 ### 5. Ingredient Co-occurrence & Correlations
 
