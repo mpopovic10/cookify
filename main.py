@@ -28,6 +28,8 @@ from src.visualisation import (
 from src.utils import report_missing_ingredients, analyze_missing_ingredients, print_analysis_results
 from src.preprocessing import build_ingredient_counter
 
+from src.evaluation import compare_models
+
 #Load data
 df = load_dataset()
 print(f"Recipes: {len(df)} | Features: {df.shape[1]}")
@@ -142,3 +144,23 @@ found = report_missing_ingredients(my_ingredients, vocab_set)
 if found:
     results = analyze_missing_ingredients(my_ingredients, df)
     print_analysis_results(results, top_n=5)
+
+#Model Comparison
+test_queries_comparison = [
+    ["chicken", "lemon", "garlic", "olive oil"],
+    ["chocolate", "butter", "sugar", "eggs"],
+    ["tomato", "basil", "mozzarella"],
+]
+
+for query in test_queries_comparison:
+    models_to_compare = {
+        "Word2Vec": (recommend_w2v, {'model': w2v, 'df': df_w2v, 'matrix': matrix_w2v}),
+        "Word2Vec + Lemma": (recommend_w2v,
+                             {'model': w2v_lemma, 'df': df_w2v_lemma, 'matrix': matrix_w2v_lemma, 'lemma': True}),
+        "TF-IDF": (recommend_tfidf, {'vectorizer': tfidf, 'matrix': matrix_tfidf, 'df': df}),
+        "TF-IDF + Lemma": (recommend_tfidf,
+                           {'vectorizer': tfidf_lemma, 'matrix': matrix_tfidf_lemma, 'df': df, 'lemma': True}),
+        "SBERT": (recommend_sbert, {'sbert_model': sbert_model, 'embeddings': sbert_embeddings, 'df': df_sbert}),
+    }
+
+    results, metrics = compare_models(query, models_to_compare, top_n=5)
