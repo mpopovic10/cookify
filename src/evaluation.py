@@ -3,6 +3,7 @@ Model evaluation and comparison utilities.
 """
 
 import pandas as pd
+import numpy as np
 
 
 def precision_at_k(df, k=5):

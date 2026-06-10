@@ -164,3 +164,48 @@ for query in test_queries_comparison:
     }
 
     results, metrics = compare_models(query, models_to_compare, top_n=5)
+
+#Hybrid Model (TF-IDF + SBERT)
+
+from src.models.hybrid import recommend_pipeline
+from src.evaluation import evaluate_hybrid_model
+
+test_queries_hybrid = [
+    ["chicken", "lemon", "garlic", "olive oil"],
+    ["chocolate", "butter", "sugar", "eggs"],
+    ["salmon", "dill", "capers"],
+    ["tomato", "basil", "mozzarella"],
+    ["flour", "yeast", "salt", "water"],
+]
+
+# Test individual queries
+for query in test_queries_hybrid[:3]:
+    print(f"\nQuery: {query}")
+    res = recommend_pipeline(
+        query,
+        tfidf_vectorizer=tfidf_lemma,
+        tfidf_matrix=matrix_tfidf_lemma,
+        sbert_model=sbert_model,
+        sbert_embeddings=sbert_embeddings,
+        df=df_sbert,
+        top_n=5,
+        candidates=50
+    )
+    if res is not None:
+        print(res[["Title", "tfidf_score", "sbert_score", "num_matched"]].to_string(index=False))
+
+# Evaluate overall performance
+hybrid_metrics = evaluate_hybrid_model(
+    test_queries_hybrid,
+    lambda q, top_n: recommend_pipeline(
+        q,
+        tfidf_vectorizer=tfidf_lemma,
+        tfidf_matrix=matrix_tfidf_lemma,
+        sbert_model=sbert_model,
+        sbert_embeddings=sbert_embeddings,
+        df=df_sbert,
+        top_n=top_n,
+        candidates=50
+    ),
+    top_n=5
+)
