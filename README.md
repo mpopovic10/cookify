@@ -32,7 +32,8 @@ We normalized recipes by:
 2) Stripping punctuation and convert everything to lowercase;
 3) Applying optional lemmatization to reduce words to base form
 
-##  Exploratory Data Analysis (EDA)
+   
+## Exploratory Data Analysis (EDA)
 
 The Exploratory Data Analysis was performed on a random sample of **5,000 recipes** drawn from the full *Food Ingredients and Recipe Dataset with Image Name Mapping* dataset (`random_state=42`).
 
@@ -59,7 +60,7 @@ Three numeric features were created to characterize each recipe:
 
 Both `num_ingredients` and `instr_word_count` are **right-skewed**: most recipes are short and simple, but a long tail of elaborate recipes pulls the mean upward.
 
-![Feature Length Distributions](recipe%20distributions.png)
+![Feature Length Distributions](recipe-distributions.png)
 
 ### 3. Recipe Complexity Distribution
 
@@ -72,7 +73,7 @@ Recipes were binned into four complexity tiers based on their ingredient count:
 
 **Moderate recipes dominate the dataset.** Average instruction length grows steadily with complexity (Moderate recipes average ~120 words, while Elaborate recipes average ~250 words), confirming that ingredient count is a highly reliable proxy for overall recipe difficulty.
 
-![Recipe Complexity Tiers](recipe%20complexity.png)
+![Recipe Complexity Tiers](recipe-complexity.png)
 
 ### 4. Ingredient Frequency Analysis
 
@@ -95,7 +96,7 @@ Before counting, ingredient strings were pre-processed to reduce text noise by s
 14. **Cream** (900 counts)
 15. **Tomato** (850 counts)
 
-![Top 15 Most Common Ingredients](top%20most%2015%20ingredients.png)
+![Top 15 Most Common Ingredients](top-most-15-ingredients.png)
 
 ### 5. Ingredient Co-occurrence & Correlations
 
@@ -104,21 +105,14 @@ A co-occurrence matrix built for the top 10 ingredients revealed clear culinary 
 * **Savoriness:** `garlic–olive oil` and `garlic–onion` are the dominant savory co-occurrence pairs.
 * **Salt Prevalence:** Salt co-occurs broadly with almost every top ingredient, making it the least discriminative feature for data retrieval.
 
-![Ingredient Co-occurrence Matrix](ingredients%20per%20occurance.png)
+![Ingredient Co-occurrence Matrix](ingredients-per-occurance.png)
 
 #### Feature Correlations (Pearson r):
 * `num_ingredients` ↔ `instr_word_count`: **~0.35** (Moderate positive correlation)
 * `num_ingredients` ↔ `title_word_count`: **~0.05** (No correlation)
 * `instr_word_count` ↔ `title_word_count`: **~0.02** (No correlation)
 
-![Correlation Matrix Heatmap](correlation%20matrix.png)
-
-
-### 💡 Key Takeaways for Recommendation Modelling
-
-* **Handling Staples:** Pantry staples like salt, butter, and sugar appear in over half of all recipes. Any retrieval model needs to handle their low discriminative power carefully (e.g., TF-IDF naturally down-weights these via the IDF component).
-* **The Long Tail:** Rare ingredients (appearing in fewer than 10 recipes) make up the long tail of the vocabulary and will benefit heavily from TF-IDF's IDF weighting.
-* **Semantic Embeddings:** Co-occurrence patterns (like `butter–sugar` or `garlic–olive oil`) validate that ingredient combinations carry deep culinary meaning. This strongly motivates using semantic embedding approaches like **Word2Vec** or **SBERT** alongside standard frequency-based retrieval.
+![Correlation Matrix Heatmap](correlation-matrix.png)
 
 
 # Model architecture
