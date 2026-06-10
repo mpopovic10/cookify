@@ -6,7 +6,7 @@ Loads data, runs EDA, trains models and tests recommendations.
 from src.data_loader import load_dataset
 from src.models.word2vec_model import build_corpus, train_w2v, build_recipe_matrix
 from src.models.tfidf_model import train_tfidf
-from src.models.recommender import recommend_w2v, recommend_tfidf
+from src.models.recommender import recommend_w2v, recommend_tfidf, recommend_sbert
 from src.analysis import (
     get_top_ingredients,
     add_complexity_column,
@@ -22,14 +22,15 @@ from src.visualisation import (
     plot_cooccurrence,
     plot_tfidf_weights,
     plot_tsne,
+    plot_sbert_embeddings
 )
 
-# ── Load data ─────────────────────────────────────────────────────────────────
+#Load data
 df = load_dataset()
 print(f"Recipes: {len(df)} | Features: {df.shape[1]}")
 print(f"Missing values:\n{df.isnull().sum()}")
 
-# ── EDA ───────────────────────────────────────────────────────────────────────
+#EDA
 plot_distributions(df)
 
 df_top = get_top_ingredients(df, n=15)
@@ -46,7 +47,7 @@ plot_correlation(corr)
 cooc = cooccurrence_matrix(df, n=10)
 plot_cooccurrence(cooc)
 
-# ── Test queries ──────────────────────────────────────────────────────────────
+#Test queries
 test_queries = [
     ["chicken", "lemon", "garlic", "olive oil"],
     ["chocolate", "butter", "sugar", "eggs"],
@@ -55,7 +56,7 @@ test_queries = [
     ["flour", "yeast", "salt", "water"],
 ]
 
-# ── Experiment 1: Word2Vec ────────────────────────────────────────────────────
+#Experiment 1: Word2Vec
 print("\n--- Experiment 1: Word2Vec ---")
 corpus = build_corpus(df)
 w2v = train_w2v(corpus)
@@ -70,7 +71,7 @@ for q in test_queries:
 
 plot_tsne(w2v)
 
-# ── Experiment 2: Word2Vec with lemmatization ─────────────────────────────────
+#Experiment 2: Word2Vec with lemmatization
 print("\n--- Experiment 2: Word2Vec with lemmatization ---")
 corpus_lemma = build_corpus(df, lemma=True)
 w2v_lemma = train_w2v(corpus_lemma)
@@ -85,7 +86,7 @@ for q in test_queries:
 
 plot_tsne(w2v_lemma)
 
-# ── Experiment 3: TF-IDF ──────────────────────────────────────────────────────
+#Experiment 3: TF-IDF
 print("\n--- Experiment 3: TF-IDF ---")
 tfidf, matrix_tfidf = train_tfidf(df)
 print(f"TF-IDF matrix shape: {matrix_tfidf.shape}")
@@ -98,7 +99,7 @@ for q in test_queries:
 
 plot_tfidf_weights(df, matrix_tfidf, tfidf, idx=0)
 
-# ── Experiment 4: TF-IDF with lemmatization ───────────────────────────────────
+#Experiment 4: TF-IDF with lemmatization
 print("\n--- Experiment 4: TF-IDF with lemmatization ---")
 tfidf_lemma, matrix_tfidf_lemma = train_tfidf(df, lemma=True)
 print(f"TF-IDF matrix shape: {matrix_tfidf_lemma.shape}")
@@ -108,3 +109,20 @@ for q in test_queries:
     print(f"\nQuery: {q}")
     res = recommend_tfidf(q, tfidf_lemma, matrix_tfidf_lemma, df, lemma=True)
     print(res[["Title", "similarity", "num_matched"]].to_string(index=False))
+
+
+#Experiment 5: Sentence-BERT
+print("\n--- Experiment 5: Sentence-BERT ---")
+
+from src.models.sbert_model import build_sbert_text, encode_recipes
+
+df_sbert = build_sbert_text(df)
+sbert_model, sbert_embeddings = encode_recipes(df_sbert)
+print(f"SBERT embeddings shape: {sbert_embeddings.shape}")
+
+for q in test_queries:
+    print(f"\nQuery: {q}")
+    res = recommend_sbert(q, sbert_model, sbert_embeddings, df_sbert)
+    print(res[["Title", "similarity", "num_matched"]].to_string(index=False))
+
+plot_sbert_embeddings(sbert_embeddings, df)

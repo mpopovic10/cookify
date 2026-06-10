@@ -136,3 +136,56 @@ def plot_tsne(model, sample=tsne_sample):
     plt.title("t-SNE of Word2Vec ingredient embeddings")
     plt.tight_layout()
     plt.show()
+
+
+def plot_sbert_embeddings(embeddings, df):
+    """
+    Visualizes SBERT embeddings using PCA reduction and recipe clusters.
+
+    :param embeddings: recipe embeddings matrix from encode_recipes()
+    :param df: recipe DataFrame with Cleaned_Ingredients column
+    """
+    from sklearn.decomposition import PCA
+
+    pca = PCA(n_components=2, random_state=42)
+    embeddings_2d = pca.fit_transform(embeddings)
+
+    def get_recipe_cluster(ingredients_list):
+        ingredients_str = " ".join(ingredients_list).lower()
+        if 'chocolate' in ingredients_str:
+            return 'Chocolate Desserts'
+        elif 'chicken' in ingredients_str:
+            return 'Chicken Dishes'
+        elif 'salmon' in ingredients_str:
+            return 'Salmon Meals'
+        return 'Other Recipes'
+
+    recipe_clusters = df['Cleaned_Ingredients'].apply(get_recipe_cluster)
+
+    fig, ax = plt.subplots(figsize=(10, 7), dpi=figure_dpi)
+
+    cluster_styles = {
+        'Other Recipes': {'color': 'green', 'alpha': 0.15, 'size': 5},
+        'Chicken Dishes': {'color': '#E67E22', 'alpha': 0.7, 'size': 20},
+        'Chocolate Desserts': {'color': '#4A2711', 'alpha': 0.7, 'size': 20},
+        'Salmon Meals': {'color': '#2980B9', 'alpha': 0.8, 'size': 25}
+    }
+
+    for cluster_name, style in cluster_styles.items():
+        mask = recipe_clusters == cluster_name
+        ax.scatter(
+            embeddings_2d[mask, 0],
+            embeddings_2d[mask, 1],
+            c=style['color'],
+            label=cluster_name,
+            alpha=style['alpha'],
+            s=style['size'],
+            edgecolors='none'
+        )
+
+    ax.set_title('Semantic Space Mapping of Recipe Embeddings (SBERT)', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlabel('Principal Component 1', fontsize=11)
+    ax.set_ylabel('Principal Component 2', fontsize=11)
+    ax.legend(loc='upper right', frameon=True, facecolor='white', edgecolor='none')
+    ax.grid(True, linestyle='--', alpha=0.3)
+    plt.show()
