@@ -25,6 +25,9 @@ from src.visualisation import (
     plot_sbert_embeddings
 )
 
+from src.utils import report_missing_ingredients, analyze_missing_ingredients, print_analysis_results
+from src.preprocessing import build_ingredient_counter
+
 #Load data
 df = load_dataset()
 print(f"Recipes: {len(df)} | Features: {df.shape[1]}")
@@ -126,3 +129,16 @@ for q in test_queries:
     print(res[["Title", "similarity", "num_matched"]].to_string(index=False))
 
 plot_sbert_embeddings(sbert_embeddings, df)
+
+#User Ingredient Analysis
+print("\nUser Ingredient Analysis")
+
+vocab = build_ingredient_counter(df)
+vocab_set = set(vocab.keys())
+
+my_ingredients = ["chicken", "lemon", "garlic", "olive oil"]
+found = report_missing_ingredients(my_ingredients, vocab_set)
+
+if found:
+    results = analyze_missing_ingredients(my_ingredients, df)
+    print_analysis_results(results, top_n=5)
