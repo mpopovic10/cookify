@@ -16,11 +16,14 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 |-----------|-------------|
 |assets/ | Visualization images |
 | data/ | Recipe dataset |
+| pipeline_v1/ | Old pipeline version |
 | src/ | Main source code modules |
 | .gitignore | Specifies folders and files to exclude from version control |
 | README.md | Project documentation |
 | main.py | Complete pipeline execution script |
 | requirements.txt | Python dependencies |
+
+Note: We keep old pipeline as a reference only, but for production, src/ folder is recommended.
 
 We also provide a Google Colab notebook link to allow insight to our cobnclusions and comments, as well as outputs: https://colab.research.google.com/drive/1gEd4TN6vSX3XSMjii869Ol5RsgeZds26?usp=sharing. It is not for production purposes, but rather for gaining understanding about our process. For production use, the modular code in src/ is recommended.
 
