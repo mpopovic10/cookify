@@ -322,5 +322,7 @@ https://github.com/user-attachments/assets/2b087c9c-1e77-4dff-9b8a-c74f39348b4c
 In conclusion, the hybrid recommendation approach outperforms single-method baselines.
 Word2Vec's semantic embeddings fail due to vector averaging, while TF-IDF's lexical matching lacks semantic understanding. By combining TF-IDF's computational efficiency and precise keyword matching with SBERT's ability at understanding context, we created a practical system that delivers both accuracy and performance.
 
+![Poster](Poster.png)
+
 # License
 This project is licensed under MIT License. See [LICENSE](LICENSE) file for details.
