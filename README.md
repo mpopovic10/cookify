@@ -22,7 +22,7 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 | README.md | Project documentation |
 | main.py | Complete pipeline execution script |
 | requirements.txt | Python dependencies |
-| UI | Folder with UI requitements |
+| UI | Folder with UI requirements |
 
 Note: We keep old pipeline as a reference only, but for production, src/ folder is recommended.
 
