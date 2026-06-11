@@ -14,6 +14,7 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 # Project structure
 | Component | Description |
 |-----------|-------------|
+| UI/ | Folder with UI requirements |
 |assets/ | Visualization images |
 | data/ | Recipe dataset |
 | pipeline_v1/ | Old pipeline version |
@@ -22,7 +23,7 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 | README.md | Project documentation |
 | main.py | Complete pipeline execution script |
 | requirements.txt | Python dependencies |
-| UI | Folder with UI requirements |
+
 
 Note: We keep old pipeline as a reference only, but for production, src/ folder is recommended.
 
@@ -64,7 +65,7 @@ Three numeric features were created to characterize each recipe:
 
 Both `num_ingredients` and `instr_word_count` are **right-skewed**: most recipes are short and simple, but a long tail of elaborate recipes pulls the mean upward.
 
-<img src="assets/feature-length-distribution.png" alt="Feature Length Distributions" width="100%" />
+<img src="assets/feature-length-distribution.png" alt="Feature Length Distribution" width="100%" />
 
 ### 3. Recipe Complexity Distribution
 
