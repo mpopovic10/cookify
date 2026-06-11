@@ -10,6 +10,19 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 -  **Preprocessing:** Recipe ingredients are cleaned and normalized by removing quantities, measurement units and punctuation to ensure consistent ingredient representation.
 -  **Similarity Matching:** The system compares user's input ingredients with recipe ingredient sets using similarity measurement to identify and rank the most relevant recipes.
 
+# Project structure
+| Component | Description |
+|-----------|-------------|
+|assets/ | Visualization images |
+| data/ | Recipe dataset |
+| src/ | Main source code modules |
+| .gitignore | Specifies folders and files to exclude from version control |
+| README.md | Project documentation |
+| main.py | Complete pipeline execution script |
+| requirements.txt | Python dependencies |
+
+We also provide a Google Colab notebook link to allow insight to our cobnclusions and comments, as well as outputs: https://colab.research.google.com/drive/1gEd4TN6vSX3XSMjii869Ol5RsgeZds26?usp=sharing. It is not for production purposes, but rather for gaining understanding about our process. For production use, the modular code in src/ is recommended.
+
 # Dataset
 ## Step 1: Data Source
 Cookify uses the [*Food Ingredients and Recipes Dataset with Images*](https://www.kaggle.com/datasets/pes12017000148/food-ingredients-and-recipe-dataset-with-images) dataset that includes 13,582 recipes, covering a wide variety of different cuisines and ingredient combinations. Each recipe has 5 features:
