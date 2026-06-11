@@ -247,3 +247,7 @@ The candidate recipes obtained in the previous step are re-evaluated using SBERT
 
 ### Step 3: Final recommendation generation
 The final result of the system is the top-N highest-ranked recipes. The final recommendations contain ingredients that closely match the user's query and are conceptually related to the kind of meal that a user is looking for.
+
+# Conclusion
+In conclusion, the hybrid recommendation approach outperforms single-method baselines.
+Word2Vec's semantic embeddings fail due to vector averaging, while TF-IDF's lexical matching lacks semantic understanding. By combining TF-IDF's computational efficiency and precise keyword matching with SBERT's ability at understanding context, we created a practical system that delivers both accuracy and performance.
