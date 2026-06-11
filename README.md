@@ -9,8 +9,9 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 4. [Model Architecture](#model-architecture)
 5. [Evaluation and Comparison](#evaluation-and-comparison)
 6. [Final Model](#final-model-tf-idf--lemmatization-with-sbert-re-ranking)
-7. [Conclusion](#conclusion)
-8. [License](#license)
+7. [User Interface](#user-interface)
+8. [Conclusion](#conclusion)
+9. [License](#license)
 
 # Overview
 
