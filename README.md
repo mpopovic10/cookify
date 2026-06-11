@@ -11,7 +11,8 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 6. [Final Model](#final-model-tf-idf--lemmatization-with-sbert-re-ranking)
 7. [User Interface](#user-interface)
 8. [Conclusion](#conclusion)
-9. [License](#license)
+9. [Poster](#poster)
+10. [License](#license)
 
 # Overview
 
@@ -25,13 +26,17 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 # Project structure
 | Component | Description |
 |-----------|-------------|
+| .idea | PyCharm project configuration files |
 | UI/ | Folder with UI requirements |
 |assets/ | Visualization images |
 | data/ | Recipe dataset |
 | images/ | Images of the recipes |
 | pipeline_v1/ | Old pipeline version |
 | src/ | Main source code modules |
+| user_guide | Video tutorial for using UI |
 | .gitignore | Specifies folders and files to exclude from version control |
+| LICENSE | Specifies details of the project license |
+| Poster.png | Poster representing the overall project |
 | README.md | Project documentation |
 | main.py | Complete pipeline execution script |
 | requirements.txt | Python dependencies |
@@ -321,6 +326,8 @@ https://github.com/user-attachments/assets/2b087c9c-1e77-4dff-9b8a-c74f39348b4c
 # Conclusion
 In conclusion, the hybrid recommendation approach outperforms single-method baselines.
 Word2Vec's semantic embeddings fail due to vector averaging, while TF-IDF's lexical matching lacks semantic understanding. By combining TF-IDF's computational efficiency and precise keyword matching with SBERT's ability at understanding context, we created a practical system that delivers both accuracy and performance.
+
+# Poster
 
 ![Poster](Poster.png)
 
