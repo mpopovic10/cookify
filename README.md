@@ -25,7 +25,7 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 
 Note: We keep old pipeline as a reference only, but for production, src/ folder is recommended.
 
-We also provide a Google Colab notebook link to allow insight to our cobnclusions and comments, as well as outputs: https://colab.research.google.com/drive/1gEd4TN6vSX3XSMjii869Ol5RsgeZds26?usp=sharing. It is not for production purposes, but rather for gaining understanding about our process. For production use, the modular code in src/ is recommended.
+We also provide a Google Colab notebook link to allow insight to our conclusions and comments, as well as outputs: https://colab.research.google.com/drive/1gEd4TN6vSX3XSMjii869Ol5RsgeZds26?usp=sharing. It is not for production purposes, but rather for gaining understanding about our process. For production use, the modular code in src/ is recommended.
 
 # Dataset
 ## Step 1: Data Source
@@ -35,19 +35,6 @@ Cookify uses the [*Food Ingredients and Recipes Dataset with Images*](https://ww
 3) **Instructions:** Includes steps to follow when making the recipe
 4) **Image Name:** A reference to the meal image in the *Food Images* zip folder
 5) **Cleaned Ingredients:** Contains processed and cleaned ingredients
-
-## Step 2: Data Cleaning
-Due to computational constraints, we randomly sample 5,000 recipes. Random sampling ensures representative coverage of the whole dataset.
-The raw dataset contains malformed rows and missing values. Because of this, we:
-1) Removed rows with missing Title or Instructions;
-2) Parsed ingredient lists from string format to Python lists;
-3) Filtered recipes with empty ingredient lists
-
-## Step 3: Ingredient Preprocessing
-We normalized recipes by:
-1) Removing quantities and measurement units (cups, tbsp, oz,...);
-2) Stripping punctuation and convert everything to lowercase;
-3) Applying optional lemmatization to reduce words to base form
 
 ## Exploratory Data Analysis (EDA)
 
@@ -161,10 +148,6 @@ Each recipe is represented as a single vector by averaging the Word2Vec embeddin
 ### Step 3: Similarity matching and recommendation
 User ingredients are converted to vectors using the same averaging method. We compute cosine similarity between the user's ingredient vector and all recipe vectors, then rank them and return the top-N most similar recipes.
 
-
-### Results:
-Similarity scores are clustered tightly, limiting the ability to distinguis between recipes. This is likely due to vector averaging causing all recipe vectors to converge to similar regions in embedding space. The recommendation quality is also low, with most recommended recipes having 0-2 matched ingredients.
-In the next experiment, we try to improve these results by introducing lemmatization.
 **Visualization of ingredient embeddings:**
 <img src="assets/w2v-tSNE.png" alt="Word2Vec t-SNE" width="100%" />
 
