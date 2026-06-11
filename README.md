@@ -189,7 +189,7 @@ The last two steps are the same as in the first experiment.
 <img src="assets/w2v-lemma-tSNE.png" alt="Word2Vec Lemma t-SNE" width="100%" />
 
 ### Results:
-The results of this experiment were very similar to those obtained in Experiment 1. The similarity scores are still clustered closely around 0.99 and the improvement in the number of matched ingredients is not very meaningful. The problem is also seen in the visualization shown above, where there are no 
+The results of this experiment were very similar to those obtained in Experiment 1. The similarity scores are still clustered closely around 0.99 and the improvement in the number of matched ingredients is not very meaningful. The problem is also seen in the visualization shown above, where there are no significantly more meaningful clusters than in the first experiment. This led us to the conclusion that lemmatization alone is not enough to resolve the problems from the first experiment. The limitation of vector averaging is still fundamental. In the next experiment, we will try a new approach and fit TF-IDF.
 
 ## Experiment 3: TF-IDF Without Lemmatization
 ### Step 1: TF-IDF vectorization
