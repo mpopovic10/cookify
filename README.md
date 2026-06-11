@@ -59,7 +59,7 @@ Three numeric features were created to characterize each recipe:
 
 Both `num_ingredients` and `instr_word_count` are **right-skewed**: most recipes are short and simple, but a long tail of elaborate recipes pulls the mean upward.
 
-<img src="recipe-distributions.png" alt="Feature Length Distributions" width="100%" />
+<img src="assets/feature-length-distribution.png" alt="Feature Length Distributions" width="100%" />
 ### 3. Recipe Complexity Distribution
 
 Recipes were binned into four complexity tiers based on their ingredient count:
@@ -71,7 +71,7 @@ Recipes were binned into four complexity tiers based on their ingredient count:
 
 **Moderate recipes dominate the dataset.** Average instruction length grows steadily with complexity (Moderate recipes average ~120 words, while Elaborate recipes average ~250 words), confirming that ingredient count is a highly reliable proxy for overall recipe difficulty.
 
-<img src="recipe-complexity.png" alt="Recipe Complexity Tiers" width="100%" />
+<img src="assets/recipy-complexity-tiers.png" alt="Recipe Complexity Tiers" width="100%" />
 
 ### 4. Ingredient Frequency Analysis
 
@@ -94,7 +94,7 @@ Before counting, ingredient strings were pre-processed to reduce text noise by s
 14. **Cream** (900 counts)
 15. **Tomato** (850 counts)
 
-<img src="top-most-15-ingredients.png" alt="Top 15 Most Common Ingredients" width="100%" />
+<img src="assets/most-common-ingredients.png" alt="Most Common Ingredients" width="100%" />
 
 ### 5. Ingredient Co-occurrence & Correlations
 
@@ -103,14 +103,14 @@ A co-occurrence matrix built for the top 10 ingredients revealed clear culinary 
 * **Savoriness:** `garlic–olive oil` and `garlic–onion` are the dominant savory co-occurrence pairs.
 * **Salt Prevalence:** Salt co-occurs broadly with almost every top ingredient, making it the least discriminative feature for data retrieval.
 
-<img src="ingredients-per-occurance.png" alt="Ingredient Co-occurrence Matrix" width="100%" />
+<img src="assets/ingredient-cooccurrence-matrix.png" alt="Ingredient Co-occurrence Matrix" width="100%" />
 
 #### Feature Correlations (Pearson r):
 * `num_ingredients` ↔ `instr_word_count`: **~0.35** (Moderate positive correlation)
 * `num_ingredients` ↔ `title_word_count`: **~0.05** (No correlation)
 * `instr_word_count` ↔ `title_word_count`: **~0.02** (No correlation)
 
-<img src="correlation-matrix.png" alt="Correlation Matrix Heatmap" width="100%" />
+<img src="assets/correlation-matrix-heatmap.png" alt="Correlation Matrix Heatmap" width="100%" />
 
 ## Step 2: Data Cleaning
 Due to computational constraints, we randomly sample 5,000 recipes. Random sampling ensures representative coverage of the whole dataset.
