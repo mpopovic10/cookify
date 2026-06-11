@@ -148,3 +148,25 @@ The last two steps are the same as in the first experiment.
 The results of this experiment were very similar to those obtained in Experiment 1. The similarity scores are still clustered closely around 0.99 and the improvement in the number of matched ingredients is not very meaningful.
 This led us to the conclusion that lemmatization alone is not enough to resolve the problems from the first experiment. The limitation of vector averaging is still fundamental.
 In the next experiment, we will try a new approach and fit TF-IDF.
+
+## Experiment 3: TF-IDF Without Lemmatization
+### Step 1: TF-IDF vectorization
+Now, we replace Word2Vec embeddings with a TF-IDF (Term Frequency-Inverse Document Frequency) representation. It is a frequency-based approach that represenets each recipe as a weighted vector of ingredient terms.
+TF-IDF is suitable for a recipe recommendation system because it assigns weights to words, based on how often they appear. For an example, common ingredients, such as 'salt' should recieve lower weight, while more distinctive ingredients receive higher weights. This way, TF-IDF may address the low number of ingredient matches observed in the Word2Vec experiments.
+To prepare the data, we converted each recipe's ingredient list into a single string, since TF-IDF expexts text documents as input.
+Then, the vectorizer is fitted on the entire recipe corpus, resulting in a sparse matrix where each row represents a recipe and each column a vocabulary term.
+
+**Model configuration:**
+- **Vectorizer:** TF-IDF
+- **Input:** normalized ingredients strings
+- **Representation:** sparse term-weight matrix
+- **Similarity metric:** Cosine similarity
+
+### Step 2: Similarity matching and recommendation
+For recipe recommendation, the user's ingredient list is processed using the same normalisation pipeline as the recipes. The resulting ingredients are joined into a query string and then transformed into a TF-IDF vector using the fitted vectorizer.
+Then, like in the first two experiments, we compute cosine similarity between the user's input and all recipe vectors. Again, the recipes are ranked according to similarity score and the top-N most similar ones are returned as recommendations.
+
+### Results:
+TF-IDF model showed a noticeable improvement over both Word2Vec experiments. The similarity scores are distributed into a much wider range instead of being clustered around a single value. Hence, cosine similarity can better distinguish between recipes and produce a more meaningful ranking.
+However, the number of matched values remains relatively low. This suggests that query terms still fail to match more descriptive ingredient names.
+Overall, TF-IDF experiment significantly outperformed the Word2Vec approaches, since it avoids the vector averaging problem. Because of this improvement, we resume with TF-IDF approach and now investigate whether lemmatization can further improve its performance.
