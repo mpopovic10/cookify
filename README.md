@@ -305,7 +305,7 @@ The final result of the system is the top-N highest-ranked recipes. The final re
 The hybrid model achieves perfect precision across test queries, meaning all top-5 recommendations contain at least one matching ingredient. However, it is important to note that the evaluation was done on a smaller set of common ingredients and the precision in the case of a more complex query is expected to be lower. The high recall (0.87) and coverage (0.87) demonstrate that the system successfully recovers most of the user's input ingredients across recommendations.
 
 # User-Interface
-The user interface was made using Streamlit, which is an open-source Python framework designed to develop and deploy interactive applications via Python.
+The user-interface was made using Streamlit, which is an open-source Python framework designed to develop and deploy interactive applications via Python.
 The folder “UI-Cookify” includes all files needed for the app to work. The application uses functions from Python modules stored in the repository. However, such functions were adjusted and modified to integrate them into the user interface in order to make them capable of returning outputs, messages, and keys.
 To improve the visual appearance and user experience of the application, custom CSS and HTML elements have been added along with Streamlit elements.
 The application was deployed on Streamlit Community Cloud, which provided a public URL that allows users to access the web application directly through a browser.
