@@ -36,7 +36,6 @@ Cookify uses the [*Food Ingredients and Recipes Dataset with Images*](https://ww
 4) **Image Name:** A reference to the meal image in the *Food Images* zip folder
 5) **Cleaned Ingredients:** Contains processed and cleaned ingredients
 
-<<<<<<< HEAD
 ## Step 2: Data Cleaning
 Due to computational constraints, we randomly sample 5,000 recipes. Random sampling ensures representative coverage of the whole dataset.
 The raw dataset contains malformed rows and missing values. Because of this, we:
@@ -50,9 +49,6 @@ We normalized recipes by:
 2) Stripping punctuation and convert everything to lowercase;
 3) Applying optional lemmatization to reduce words to base form
 
-   
-=======
->>>>>>> origin/main
 ## Exploratory Data Analysis (EDA)
 
 The Exploratory Data Analysis was performed on a random sample of **5,000 recipes** drawn from the full *Food Ingredients and Recipe Dataset with Image Name Mapping* dataset (`random_state=42`).
@@ -80,11 +76,9 @@ Three numeric features were created to characterize each recipe:
 
 Both `num_ingredients` and `instr_word_count` are **right-skewed**: most recipes are short and simple, but a long tail of elaborate recipes pulls the mean upward.
 
-<<<<<<< HEAD
 <img src="assets/recipe-distributions.png" alt="Feature Length Distributions" width="100%" />
-=======
 <img src="assets/feature-length-distribution.png" alt="Feature Length Distributions" width="100%" />
->>>>>>> origin/main
+
 ### 3. Recipe Complexity Distribution
 
 Recipes were binned into four complexity tiers based on their ingredient count:
