@@ -170,3 +170,19 @@ Then, like in the first two experiments, we compute cosine similarity between th
 TF-IDF model showed a noticeable improvement over both Word2Vec experiments. The similarity scores are distributed into a much wider range instead of being clustered around a single value. Hence, cosine similarity can better distinguish between recipes and produce a more meaningful ranking.
 However, the number of matched values remains relatively low. This suggests that query terms still fail to match more descriptive ingredient names.
 Overall, TF-IDF experiment significantly outperformed the Word2Vec approaches, since it avoids the vector averaging problem. Because of this improvement, we resume with TF-IDF approach and now investigate whether lemmatization can further improve its performance.
+
+## Experiment 4: TF-IDF With Lemmatization
+### Step 1: Lemmatized TF-IDF vectorization
+In this experiment, we will combine the TF-IDF from Experiment 3 with the lemmatization procedure from Experiment 2. The reasoning is the same as before: lemmatization reduces words to their base form, while considering their meaning and grammatical role. Applying lemmatization may improve the representation by merging different forms of the same words.
+As in the previous experiment, each recipe is converted into a string of normalized ingredient tokens, but normalisation process now includes lemmatization before fitting the TF-IDF vectorizer.
+**Model configuration:**
+- **Vectorizer:** TF-IDF
+- **Preprocessing:** Tokenization and lemmatization
+- **Representation:** Sparse term-weight matrix
+- **Similarity metric:** Cosine similarity
+
+### Step 2: Similarity matching and recommendation
+The recommendation process is the same as in Experiment 3, as well as computing cosine similarity.
+
+### Results:
+The model performs modestly, but consistently better than the non-lemmatized TF-IDF model. Similarity scores are generally slightly better, but the improvement is not dramatic. Still, this experiment produced the best overall results out of the first four experiments.
