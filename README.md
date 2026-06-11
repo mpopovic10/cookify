@@ -210,3 +210,27 @@ The SBERT model produced the most semantically relevant recommendations out of a
 The num_matched scores still remain low due to the same mismatch between individual tokens and full inredient phrases observed in the previous experiments.
 
 Overall, the SBERT model outperforms all of the previous experiments in recommendation relevanece, leading us to the conclusion that semantic sentence embeddings are better suited for this task than token-level approaches.
+
+# Evaluation and Comparison
+
+To evaluate the results of the experiments, we will use the following metrics:
+ - **Precision@5:** Measures how many of the top 5 recommended recipes are relevant. The higher score indicates better ranking quality.
+ - **Recall@5:** Measures how well the system retireves query ingredients across the top 5 results. The higher score, the better (more query ingredients are found)
+ - **Coverage:** The average proportion of query ingredients matched per recommendation. The higher score indicates that more query ingredients are captured.
+ - **Best rank:** The position of the highest-scoring relevant recipe. Lower values are better as they propose that relevant results appear earlier in the ranking.
+
+| Model | Precision@5 | Recall@5 | Coverage | Best rank |
+|-------|-------------|----------|----------|-----------|
+| Word2Vec| 0.67 | 0.38 | 0.48 | 1-4 |  
+| Word2Vec with lemmatization | 0.80 | 0.32 | 0.31 | 1-4 |
+| TF-IDF | 0.47 | 0.18 | 0.22 | 1-3 |
+| TF-IDF with lemmatization | 0.73 | 0.26 | 0.26 | 1-3 |
+| SBERT | 0.73 | 0.39 | 0.38 | 1-2 |
+
+**Conclusion:**
+
+From the table and results of each experiment, it is visible that the **Word2Vec** models achieve consistently high cosine similarity scores. However, this did not reflect in their performance. Even though Precision@5 is relatively high, Recall@5 and Coverage remain limited, indicating that the models fail to fully capture all query ingredients. Furthermore, lemmatization did not significantly improve Word2Vec performance, since the problem of word embeddings averaging is still present.
+**TF-IDF** models show clear improvement in ranking quality. Unlike, W2V, it produces more varied similarity scores and improves the system's ability to distinguish between recipes. The lemmatization further improves its performance, with all metrics being better, confirming that normalization helps reduce vocabulary mismatch. However, TF-IDF still struggles with semantic understanding, especially when ingredient expressions differ from exact query tokens.
+**SBERT** achieves the most consistent overall performance, with relevant recipes appearing in top positions. This shows that SBERT is more effective at capturing semantic similarity between recipes and user queries compared to token-based methods.
+
+Based on this, we decide to continue with the combination of TF-IDF with lemmatization for reliable lexical matching and SBERT due to its strong semantic retrieval and ranking quality. This will combine TF-IDF's robust keyword matching and SBERT's deep contextual understanding.
