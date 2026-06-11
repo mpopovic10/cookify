@@ -2,6 +2,16 @@
 
 Cookify is a recipe recommendation system that suggests meals based on ingredients you already have, using text preprocessing and similarity matching.
 
+## Table of Contents
+1. [Overview](#overview)
+2. [Project Structure](#project-structure)
+3. [Dataset](#dataset)
+4. [Model Architecture](#model-architecture)
+5. [Evaluation and Comparison](#evaluation-and-comparison)
+6. [Final Model](#final-model-tf-idf--lemmatization-with-sbert-re-ranking)
+7. [Conclusion](#conclusion)
+8. [License](#license)
+
 # Overview
 
 **Cookify** is an ingredient-based recipe recommendation system created to help users decide what to cook using the ingredients they already have. The aim is to save time when choosing meals and reduce food waste. The system utilizes text preprocessing and similarity matching to compare user-input ingredients with a dataset of recipes and recommend the most relevant matches.
@@ -304,3 +314,6 @@ The web application can be accessed through the following link: https://cookify.
 # Conclusion
 In conclusion, the hybrid recommendation approach outperforms single-method baselines.
 Word2Vec's semantic embeddings fail due to vector averaging, while TF-IDF's lexical matching lacks semantic understanding. By combining TF-IDF's computational efficiency and precise keyword matching with SBERT's ability at understanding context, we created a practical system that delivers both accuracy and performance.
+
+# License
+This project is licensed under MIT License. See [LICENSE](LICENSE) file for details.
