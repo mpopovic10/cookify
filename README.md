@@ -76,7 +76,6 @@ Three numeric features were created to characterize each recipe:
 
 Both `num_ingredients` and `instr_word_count` are **right-skewed**: most recipes are short and simple, but a long tail of elaborate recipes pulls the mean upward.
 
-<img src="assets/recipe-distributions.png" alt="Feature Length Distributions" width="100%" />
 <img src="assets/feature-length-distribution.png" alt="Feature Length Distributions" width="100%" />
 
 ### 3. Recipe Complexity Distribution
