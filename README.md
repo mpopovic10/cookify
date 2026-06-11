@@ -315,7 +315,7 @@ The web application can be accessed through the following link: https://cookify.
 
 For a demonstration of how to use the Cookify application, watch the video below:
 
-<video src="https://github.com/mpopovic10/cookify/raw/main/user_guide/cookify_.mp4" width="100%" controls></video>
+<video src="https://github.com/mpopovic10/cookify/raw/main/user_guide/cookify_.mp4.mp4" width="100%" controls></video>
 
 # Conclusion
 In conclusion, the hybrid recommendation approach outperforms single-method baselines.
