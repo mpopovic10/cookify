@@ -274,11 +274,7 @@ To evaluate the results of the experiments, we will use the following metrics:
 
 | Model | Precision@5 | Recall@5 | Coverage | Best rank |
 |-------|-------------|----------|----------|-----------|
-<<<<<<< HEAD
-| Word2Vec| 0.67 | 0.38 | 0.48 | 1-4 |   
-=======
 | Word2Vec| 0.67 | 0.38 | 0.48 | 1-4 |  
->>>>>>> origin/main
 | Word2Vec with lemmatization | 0.80 | 0.32 | 0.31 | 1-4 |
 | TF-IDF | 0.47 | 0.18 | 0.22 | 1-3 |
 | TF-IDF with lemmatization | 0.73 | 0.26 | 0.26 | 1-3 |
