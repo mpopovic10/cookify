@@ -17,6 +17,7 @@ Cookify is a recipe recommendation system that suggests meals based on ingredien
 | UI/ | Folder with UI requirements |
 |assets/ | Visualization images |
 | data/ | Recipe dataset |
+| images/ | Images of the recipes |
 | pipeline_v1/ | Old pipeline version |
 | src/ | Main source code modules |
 | .gitignore | Specifies folders and files to exclude from version control |
