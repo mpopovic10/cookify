@@ -98,3 +98,16 @@ A co-occurrence matrix built for the top 10 ingredients revealed clear culinary 
 * `instr_word_count` ↔ `title_word_count`: **~0.02** (No correlation)
 
 <img src="correlation-matrix.png" alt="Correlation Matrix Heatmap" width="100%" />
+
+## Step 2: Data Cleaning
+Due to computational constraints, we randomly sample 5,000 recipes. Random sampling ensures representative coverage of the whole dataset.
+The raw dataset contains malformed rows and missing values. Because of this, we:
+1) Removed rows with missing Title or Instructions;
+2) Parsed ingredient lists from string format to Python lists;
+3) Filtered recipes with empty ingredient lists
+
+## Step 3: Ingredient Preprocessing
+We normalized recipes by:
+1) Removing quantities and measurement units (cups, tbsp, oz,...);
+2) Stripping punctuation and convert everything to lowercase;
+3) Applying optional lemmatization to reduce words to base form
