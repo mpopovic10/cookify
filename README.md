@@ -111,3 +111,25 @@ We normalized recipes by:
 1) Removing quantities and measurement units (cups, tbsp, oz,...);
 2) Stripping punctuation and convert everything to lowercase;
 3) Applying optional lemmatization to reduce words to base form
+
+# Model architecture
+## Experiment 1: Word2Vec Without Lemmatization
+### Step 1: Word2Vec training
+We train a Word2Vec skip-gram model on the ingredient corpus extracted from the recipes. We use the skip-gram variant because we expect it to better perform on rare ingredients than Continuous Bag of Words would, since it predicts the surrounding words based on the given word.
+The model learns vector representations of indvidual igredient tokens, capturing semantic relationships between similar ingredients. For example, 'salt' and 'pepper' as common seasonings are positioned close in the embedding space, whereas 'salt' and 'banana' should be placed further apart.
+
+**Model configuration:**
+- **Vector size:** 100 dimensions (how many numbers represent each ingredient in the vector space)
+- **Window size:** 5 (determines how many context words should be predicted on each side)
+- **Min count:** 1 (includes all ingredients if they show even once)
+- **Training algorithm:** sg=1 (Skip-gram)
+
+### Step 2: Recipe vectorization
+Each recipe is represented as a single vector by averaging the Word2Vec embeddings of all its ingredient tokens. This captures the overall profile of the recipe by comining individual ingredient semantics.
+
+### Step 3: Similarity matching and recommendation
+User ingredients are converted to vectors using the same averaging method. We compute cosine similarity between the user's ingredient vector and all recipe vectors, then rank them and return the top-N most similar recipes.
+
+### Results:
+Similarity scores are clustered tightly, limiting the ability to distinguis between recipes. This is likely due to vector averaging causing all recipe vectors to converge to similar regions in embedding space. The recommendation quality is also low, with most recommended recipes having 0-2 matched ingredients.
+In the next experiment, we try to improve these results by introducing lemmatization.
