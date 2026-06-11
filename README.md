@@ -143,9 +143,12 @@ Each recipe is represented as a single vector by averaging the Word2Vec embeddin
 ### Step 3: Similarity matching and recommendation
 User ingredients are converted to vectors using the same averaging method. We compute cosine similarity between the user's ingredient vector and all recipe vectors, then rank them and return the top-N most similar recipes.
 
+**Visualization of ingredient embeddings:**
+<img src="assets/w2v-tSNE.png" alt="Word2Vec t-SNE" width="100%" />
+
 ### Results:
-Similarity scores are clustered tightly, limiting the ability to distinguis between recipes. This is likely due to vector averaging causing all recipe vectors to converge to similar regions in embedding space. The recommendation quality is also low, with most recommended recipes having 0-2 matched ingredients.
-In the next experiment, we try to improve these results by introducing lemmatization.
+Similarity scores are clustered tightly, limiting the ability to distinguish between recipes. The clustering is also visible in the t-SNE projection shown above, where the ingredient embeddings do form semantic clusters, but the problem manifests at the recipe level. This is likely due to vector averaging causing all recipe vectors to converge to similar regions in embedding space.
+The recommendation quality is also low, with most recommended recipes having 0-2 matched ingredients. In the next experiment, we try to improve these results by introducing lemmatization.
 
 ## Experiment 2: Word2Vec With Lemmatization
 ### Step 1: Build the lemmatizer
@@ -157,10 +160,11 @@ We again train the same Word2Vec model as in the first experiment, but we apply 
 ### Step 3 and Step 4: Recipe vectorization, similarity matching and recommendation
 The last two steps are the same as in the first experiment.
 
+**Visualization of ingredient embeddings:**
+<img src="assets/w2v-lemma-tSNE.png" alt="Word2Vec Lemma t-SNE" width="100%" />
+
 ### Results:
-The results of this experiment were very similar to those obtained in Experiment 1. The similarity scores are still clustered closely around 0.99 and the improvement in the number of matched ingredients is not very meaningful.
-This led us to the conclusion that lemmatization alone is not enough to resolve the problems from the first experiment. The limitation of vector averaging is still fundamental.
-In the next experiment, we will try a new approach and fit TF-IDF.
+The results of this experiment were very similar to those obtained in Experiment 1. The similarity scores are still clustered closely around 0.99 and the improvement in the number of matched ingredients is not very meaningful. The problem is also seen in the visualization shown above, where there are no significantly more meaningful clusters than in the first experiment. This led us to the conclusion that lemmatization alone is not enough to resolve the problems from the first experiment. The limitation of vector averaging is still fundamental. In the next experiment, we will try a new approach and fit TF-IDF.
 
 ## Experiment 3: TF-IDF Without Lemmatization
 ### Step 1: TF-IDF vectorization
@@ -178,6 +182,9 @@ Then, the vectorizer is fitted on the entire recipe corpus, resulting in a spars
 ### Step 2: Similarity matching and recommendation
 For recipe recommendation, the user's ingredient list is processed using the same normalisation pipeline as the recipes. The resulting ingredients are joined into a query string and then transformed into a TF-IDF vector using the fitted vectorizer.
 Then, like in the first two experiments, we compute cosine similarity between the user's input and all recipe vectors. Again, the recipes are ranked according to similarity score and the top-N most similar ones are returned as recommendations.
+
+<img src="assets/top-TFIDF-ingredients.png" alt="Top TF-IDF Ingredients" width="100%" />
+The chart shows the TF-IDF weights for a sample recipe (Hazelnut Cookies). It is visible that the top rated ingredients are relevant to the recipe, while more common modifiers receive lower weights.
 
 ### Results:
 TF-IDF model showed a noticeable improvement over both Word2Vec experiments. The similarity scores are distributed into a much wider range instead of being clustered around a single value. Hence, cosine similarity can better distinguish between recipes and produce a more meaningful ranking.
@@ -216,6 +223,9 @@ Each recipe is converted into a natural language sentence combining the recipe a
 - **Input:** Natural language sentence (title an ingredients)
 - **Representation:** Dense 384-dimensional vector
 - **Similarity metric:** Cosine similarity
+
+<img src="assets/SBERT-space-mapping.png" alt="SBERT Space Mapping" width="100%" />
+The visualization shows how SBERT encodes recipes as semantic vectors and clusters them in 2D space. Recipes are naturally grouped into relevant categories, showing SBERT's ability to capture high-level semantic meaning beyond individual ingredients.
 
 ### Results:
 The SBERT model produced the most semantically relevant recommendations out of all five experiments. Unlike Word2Vec, the similarity scores are in a meaningful range and unlike TF-IDF, the recommendations capture the overall cooking context and not just keyword overlap.
