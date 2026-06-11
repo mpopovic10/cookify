@@ -312,6 +312,11 @@ The application was deployed on Streamlit Community Cloud, which provided a publ
 
 The web application can be accessed through the following link: https://cookify.streamlit.app/
 
+
+For a demonstration of how to use the Cookify application, watch the video below:
+
+<video src="user_guide/cookify_.mp4" width="100%" controls></video>
+
 # Conclusion
 In conclusion, the hybrid recommendation approach outperforms single-method baselines.
 Word2Vec's semantic embeddings fail due to vector averaging, while TF-IDF's lexical matching lacks semantic understanding. By combining TF-IDF's computational efficiency and precise keyword matching with SBERT's ability at understanding context, we created a practical system that delivers both accuracy and performance.
